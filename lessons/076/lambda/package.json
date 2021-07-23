@@ -4,11 +4,14 @@
   "description": "",
   "main": "bot.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@slack/bolt": "^3.5.0"
+  },
+  "devDependencies": {
+    "jest": "^27.0.6"
   }
 }

@@ -30,27 +30,26 @@ npm install @slack/bolt
 https://53a9ba02d950.ngrok.io/slack/events
 
 
+https://api.slack.com/tutorials/events-api-using-aws-lambda
 
-// Listen for an event from the Events API
-app.event(eventType, fn);
+```
+npm install --save-dev jest
+```
 
-// Convenience method to listen to only `message` events using a string or RegExp
-app.message([pattern ,] fn);
+## 2. Build
+```
+docker build -t 424432388155.dkr.ecr.us-east-1.amazonaws.com/bot:v1.0.0 .
+docker push 424432388155.dkr.ecr.us-east-1.amazonaws.com/bot:v1.0.0
+```
 
-// Listen for an action from a Block Kit element (buttons, select menus, date pickers, etc)
-app.action(actionId, fn);
+Signing secrets: https://api.slack.com/authentication/verifying-requests-from-slack
+Features: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-vs-rest.html
+Cost: https://aws.amazon.com/about-aws/whats-new/2019/12/amazon-api-gateway-offers-faster-cheaper-simpler-apis-using-http-apis-preview/
+Validating Library for Node: https://nodejs.org/api/crypto.html#crypto_crypto_createhmac_algorithm_key_options
+Verify Requst from Slack: https://api.slack.com/authentication/verifying-requests-from-slack
 
-// Listen for dialog submissions
-app.action({ callback_id: callbackId }, fn);
-
-// Listen for a global or message shortcuts
-app.shortcut(callbackId, fn);
-
-// Listen for slash commands
-app.command(commandName, fn);
-
-// Listen for view_submission modal events
-app.view(callbackId, fn);
-
-// Listen for options requests (from select menus with an external data source)
-app.options(actionId, fn);
+## Clean Up
+- Delete ngrok
+- Delete ECR `bot`
+- Delete IAM User `admin`
+- Delete docker images `docker rm -vf $(docker ps -a -q) && docker rmi -f $(docker images -a -q)`

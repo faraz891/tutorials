@@ -34,7 +34,7 @@ const processMessages = (body, callback) => {
 const processRequest = (body, callback) => {
     switch (body.event.type) {
         case "app_mention": processAppMention(body, callback); break;
-        case "messages": processMessages(body, callback); break;
+        case "message": processMessages(body, callback); break;
         default: callback(null);
     }
 };

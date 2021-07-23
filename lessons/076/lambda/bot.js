@@ -1,5 +1,6 @@
 const axios = require('axios');
 const security = require('./security');
+const todo = require('./blocks');
 
 const signingSecret = process.env.SLACK_SIGNING_SECRET;
 const token = process.env.SLACK_BOT_TOKEN;
@@ -7,7 +8,7 @@ const token = process.env.SLACK_BOT_TOKEN;
 const processAppMention = (body, callback) => {
     const message = {
         channel: body.event.channel,
-        text: "ura!!! :)"
+        blocks: [blocks.todo("create aws lambda secrets manager integration lesson")]
     };
     console.debug("message:", message);
     axios({

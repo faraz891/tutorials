@@ -9,7 +9,7 @@ const processAppMention = (body, callback) => {
     console.debug(body.event.text)
     const message = {
         channel: body.event.channel,
-        blocks: [blocks.todo("create aws lambda secrets manager integration lesson")]
+        blocks: blocks.todo("create aws lambda secrets manager integration lesson")
     };
     console.debug("message:", message);
     axios({

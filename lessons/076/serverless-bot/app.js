@@ -6,19 +6,19 @@ const app = new App({
 });
 
 app.message(async ({ message, say }) => {
-    console.log(message)
-    const reversedText = [...message.text].reverse().join("");
-    await say(reversedText);
+  console.log(message)
+  const reversedText = [...message.text].reverse().join("");
+  await say(reversedText);
 });
 
 
 app.event('app_mention', async ({ event, say }) => {
-    console.log(event)
-    await say("asd")
+  console.log(event)
+  await say("asd")
 });
 
 (async () => {
   await app.start(process.env.PORT || 5000);
-  
+
   console.log('Serverless Bolt is running!');
 })();

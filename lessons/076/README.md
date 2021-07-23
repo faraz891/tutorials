@@ -47,6 +47,7 @@ Features: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-
 Cost: https://aws.amazon.com/about-aws/whats-new/2019/12/amazon-api-gateway-offers-faster-cheaper-simpler-apis-using-http-apis-preview/
 Validating Library for Node: https://nodejs.org/api/crypto.html#crypto_crypto_createhmac_algorithm_key_options
 Verify Requst from Slack: https://api.slack.com/authentication/verifying-requests-from-slack
+chat.postMessage: https://api.slack.com/methods/chat.postMessage
 
 ## Clean Up
 - Delete ngrok

@@ -26,9 +26,15 @@ const processAppMention = (body, callback) => {
         });
 };
 
+const processMessages = (body, callback) => {
+    console.log("message:", body.event.text)
+    callback(null)
+};
+
 const processRequest = (body, callback) => {
     switch (body.event.type) {
         case "app_mention": processAppMention(body, callback); break;
+        case "messages": processMessages(body, callback); break;
         default: callback(null);
     }
 };

@@ -1,4 +1,4 @@
-const https = require('https')
+const axios = require('axios');
 const security = require('./security');
 
 const signingSecret = process.env.SLACK_SIGNING_SECRET;
@@ -14,36 +14,25 @@ const verify = (event, callback) => {
 
 const processAppMention = (body, callback) => {
     if (security.validateSlackRequest(body, signingSecret)) {
-        const message = JSON.stringify({
+        const message = {
             token: token,
             channel: body.channel,
             text: "ura!!! :)"
-        });
+        };
 
-        const options = {
-            hostname: 'slack.com',
-            port: 443,
-            path: '/api/chat.postMessage',
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }
-
-        const req = https.request(options, res => {
-            console.log(`statusCode: ${res.statusCode}`)
-
-            res.on('data', d => {
-                process.stdout.write(d)
+        axios({
+            method: 'post',
+            url: 'https://slack.com/api/chat.postMessage',
+            headers: { 'Content-Type': 'application/json' },
+            data: message
+        })
+            .then(function (response) {
+                console.log(response);
             })
-        })
+            .catch(function (error) {
+                console.log(error);
+            });
 
-        req.on('error', error => {
-            console.error(error)
-        })
-
-        req.write(data)
-        req.end()
         callback(null);
     }
     else callback("verification failed");

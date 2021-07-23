@@ -13,30 +13,36 @@ const verify = (event, callback) => {
 };
 
 const processAppMention = (body, callback) => {
-    if (security.validateSlackRequest(body, signingSecret)) {
-        const message = {
-            token: token,
-            channel: body.channel,
-            text: "ura!!! :)"
-        };
-
-        axios({
-            method: 'post',
-            url: 'https://slack.com/api/chat.postMessage',
-            headers: { 'Content-Type': 'application/json' },
-            data: message
+    const message = {
+        token: token,
+        channel: body.channel,
+        text: "ura!!! :)"
+    };
+    axios({
+        method: 'post',
+        url: 'https://slack.com/api/chat.postMessage',
+        headers: { 'Content-Type': 'application/json' },
+        data: message
+    })
+        .then(function (response) {
+            console.log(response);
+            callback(null);
         })
-            .then(function (response) {
-                console.log(response);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        .catch(function (error) {
+            console.log(error);
+            callback("failed to process app_mention");
+        });
+};
 
-        callback(null);
+const processRequest = (body, callback) => {
+    if (security.validateSlackRequest(body, signingSecret)) {
+        switch (body.event.type) {
+            case "app_mention": processAppMention(body, callback); break;
+            default: callback(null);
+        }
     }
     else callback("verification failed");
-}
+};
 
 exports.handler = (event, context, callback) => {
     console.log("slack request event:", event);
@@ -44,8 +50,7 @@ exports.handler = (event, context, callback) => {
 
     switch (body.type) {
         case "url_verification": verify(event, callback); break;
-        case "app_mention": processAppMention(body, callback); break;
-        // case "message": processMessage(event, callback); break;
+        case "event_callback": processRequest(body, callback); break;
         default: callback(null);
     }
 };

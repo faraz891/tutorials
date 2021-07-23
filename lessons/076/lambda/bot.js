@@ -7,7 +7,7 @@ const token = process.env.SLACK_BOT_TOKEN;
 const processAppMention = (body, callback) => {
     const message = {
         token: token,
-        channel: body.channel,
+        channel: body.event.channel,
         text: "ura!!! :)"
     };
     console.debug("message:", message);

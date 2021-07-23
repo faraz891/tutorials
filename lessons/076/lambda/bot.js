@@ -14,7 +14,7 @@ const processAppMention = (body, callback) => {
     axios({
         method: 'post',
         url: 'https://slack.com/api/chat.postMessage',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json; charset=utf-8' },
         data: message
     })
         .then(function (response) {

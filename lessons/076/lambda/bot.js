@@ -1,18 +1,18 @@
-const security = require('../security');
+const security = require('./security');
 
-const signingSecret = "";
+const signingSecret = process.env.SLACK_SIGNING_SECRET;
+const token = process.env.SLACK_BOT_TOKEN;
 
 const verify = (event, callback) => {
     console.log("testing: verify");
-    // if (data.token === VERIFICATION_TOKEN) callback(null, data.challenge);
-    if (security.validateSlackRequest(event)) callback(null, data.challenge);
+    const body = JSON.parse(event.body);
+    if (security.validateSlackRequest(event, signingSecret)) callback(null, body.challenge);
     else callback("verification failed");
-}
+};
 
 exports.handler = (event, context, callback) => {
-    const body = JSON.parse(event.body);
     switch (body.type) {
-        case "url_verification": verify(body, callback); break;
+        case "url_verification": verify(event, callback); break;
         default: callback(null);
     }
 };

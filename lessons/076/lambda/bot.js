@@ -1,3 +1,4 @@
+const https = require('https')
 const security = require('./security');
 
 const signingSecret = process.env.SLACK_SIGNING_SECRET;
@@ -11,19 +12,41 @@ const verify = (event, callback) => {
     else callback("verification failed");
 };
 
-const processEvent = (event, callback) => {
-    if (!event.bot_id && /(aws|lambda)/ig.test(event.text)) {
-        var text = `<@${event.user}> isn't AWS Lambda awesome?`;
-        var message = {
+const processAppMention = (body, callback) => {
+    if (security.validateSlackRequest(body, signingSecret)) {
+        const message = JSON.stringify({
             token: token,
-            channel: event.channel,
-            text: text
-        };
-        var query = qs.stringify(message); // prepare the querystring
-        https.get(`https://slack.com/api/chat.postMessage?${query}`);
-    }
+            channel: body.channel,
+            text: "ura!!! :)"
+        });
 
-    callback(null);
+        const options = {
+            hostname: 'slack.com',
+            port: 443,
+            path: '/api/chat.postMessage',
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+
+        const req = https.request(options, res => {
+            console.log(`statusCode: ${res.statusCode}`)
+
+            res.on('data', d => {
+                process.stdout.write(d)
+            })
+        })
+
+        req.on('error', error => {
+            console.error(error)
+        })
+
+        req.write(data)
+        req.end()
+        callback(null);
+    }
+    else callback("verification failed");
 }
 
 exports.handler = (event, context, callback) => {
@@ -32,6 +55,8 @@ exports.handler = (event, context, callback) => {
 
     switch (body.type) {
         case "url_verification": verify(event, callback); break;
+        case "app_mention": processAppMention(body, callback); break;
+        // case "message": processMessage(event, callback); break;
         default: callback(null);
     }
 };

@@ -7,6 +7,11 @@ Scope
 - groups:history
 - chat:write
 
+Events:
+- app_mention
+- message.groups
+- message.channels
+
 Name: WALL-E
 Description: Compactor robot
 #233878

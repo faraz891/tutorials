@@ -10,6 +10,7 @@ const processAppMention = (body, callback) => {
         channel: body.channel,
         text: "ura!!! :)"
     };
+    console.debug("message:", message);
     axios({
         method: 'post',
         url: 'https://slack.com/api/chat.postMessage',

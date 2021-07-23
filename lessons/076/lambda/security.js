@@ -14,9 +14,9 @@ exports.validateSlackRequest = (event, signingSecret) => {
     const isValid = computedSlackSignature === slackSignature;
 
     // Debug
-    console.log("slack signature:", slackSignature);
-    console.log("computed slack signature:", computedSlackSignature);
-    console.log("slack requests is valid?:", isValid)
+    console.debug("slack signature:", slackSignature);
+    console.debug("computed slack signature:", computedSlackSignature);
+    console.debug("slack requests is valid?:", isValid)
 
     return isValid;
 };

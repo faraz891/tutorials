@@ -17,11 +17,11 @@ const processAppMention = (body, callback) => {
         data: message
     })
         .then(function (response) {
-            console.log(response);
+            console.debug("responce from slack:", response);
             callback(null);
         })
         .catch(function (error) {
-            console.log(error);
+            console.error(error);
             callback("failed to process app_mention");
         });
 };

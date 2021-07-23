@@ -6,7 +6,6 @@ const token = process.env.SLACK_BOT_TOKEN;
 
 const processAppMention = (body, callback) => {
     const message = {
-        token: token,
         channel: body.event.channel,
         text: "ura!!! :)"
     };
@@ -14,7 +13,7 @@ const processAppMention = (body, callback) => {
     axios({
         method: 'post',
         url: 'https://slack.com/api/chat.postMessage',
-        headers: { 'Content-Type': 'application/json; charset=utf-8' },
+        headers: { 'Content-Type': 'application/json; charset=utf-8', 'Authorization': `Bearer ${token}` },
         data: message
     })
         .then(function (response) {

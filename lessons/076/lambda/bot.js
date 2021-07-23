@@ -35,8 +35,9 @@ const processRequest = (body, callback) => {
 
 exports.handler = (event, context, callback) => {
     console.debug("slack request event:", event);
-    const body = JSON.parse(event.body);
-    if (security.validateSlackRequest(body, signingSecret)) {
+
+    if (security.validateSlackRequest(event, signingSecret)) {
+        const body = JSON.parse(event.body);
         switch (body.type) {
             case "url_verification": callback(null, body.challenge); break;
             case "event_callback": processRequest(body, callback); break;

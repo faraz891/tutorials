@@ -1,18 +1,16 @@
-const https = require('https'),
-      qs = require('querystring'),
-      VERIFICATION_TOKEN = "UdG3UFNsPGoobvRzK5F2oIqe";
+const security = require('../security');
 
-function verify(data, callback) {
+const signingSecret = "";
+
+const verify = (event, callback) => {
     console.log("testing: verify");
-    if (data.token === VERIFICATION_TOKEN) callback(null, data.challenge);
-    else callback("verification failed");   
+    // if (data.token === VERIFICATION_TOKEN) callback(null, data.challenge);
+    if (security.validateSlackRequest(event)) callback(null, data.challenge);
+    else callback("verification failed");
 }
 
-exports.handler = (data, context, callback) => {
-    console.log("testing");
-    console.log(data);
-    const body = JSON.parse(data.body)
-    console.log(body)
+exports.handler = (event, context, callback) => {
+    const body = JSON.parse(event.body);
     switch (body.type) {
         case "url_verification": verify(body, callback); break;
         default: callback(null);

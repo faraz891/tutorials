@@ -11,7 +11,6 @@ app.message(async ({ message, say }) => {
   await say(reversedText);
 });
 
-
 app.event('app_mention', async ({ event, say }) => {
   console.log(event)
   await say("asd")

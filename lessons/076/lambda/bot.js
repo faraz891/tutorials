@@ -5,12 +5,13 @@ const token = process.env.SLACK_BOT_TOKEN;
 
 const verify = (event, callback) => {
     const body = JSON.parse(event.body);
+    console.log("request body:", body)
 
     if (security.validateSlackRequest(event, signingSecret)) callback(null, body.challenge);
     else callback("verification failed");
 };
 
-const process = (event, callback) => {
+const processEvent = (event, callback) => {
     if (!event.bot_id && /(aws|lambda)/ig.test(event.text)) {
         var text = `<@${event.user}> isn't AWS Lambda awesome?`;
         var message = {
@@ -26,8 +27,8 @@ const process = (event, callback) => {
 }
 
 exports.handler = (event, context, callback) => {
+    console.log("slack request event:", event);
     const body = JSON.parse(event.body);
-    console.log(`slack request body: ${body}`);
 
     switch (body.type) {
         case "url_verification": verify(event, callback); break;

@@ -81,6 +81,6 @@ Block UI - https://app.slack.com/block-kit-builder/
 - Delete Lambda `wall-e`
 - Delete CloudWatch log groups `/aws/lambda/wall-e`
 - Delete API Gateway `slack`
-- Delete docker images `docker rm -vf $(docker ps -a -q) && docker rmi -f $(docker images -a -q)`
+- Delete docker images `docker rmi -f $(docker images -a -q)`
 - Delete slack bot `wall-e`
 - Delete `earth` Slack channel

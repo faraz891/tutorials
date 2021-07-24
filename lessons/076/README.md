@@ -358,13 +358,13 @@ docker push 424432388155.dkr.ecr.us-east-1.amazonaws.com/wall-e:v0.1.3
 - Delete `earth` Slack channel
 
 ## Links
-Basic app setup: https://api.slack.com/authentication/basics
-Signing secrets: https://api.slack.com/authentication/verifying-requests-from-slack
-Features: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-vs-rest.html
-Cost: https://aws.amazon.com/about-aws/whats-new/2019/12/amazon-api-gateway-offers-faster-cheaper-simpler-apis-using-http-apis-preview/
-Validating Library for Node: https://nodejs.org/api/crypto.html#crypto_crypto_createhmac_algorithm_key_options
-Verify Requst from Slack: https://api.slack.com/authentication/verifying-requests-from-slack
-chat.postMessage: https://api.slack.com/methods/chat.postMessage
-Definition of $LATEST version of AWS Lambda: https://stackoverflow.com/questions/60703463/definition-of-latest-version-of-aws-lambda
-Slack Bold Node JS: https://github.com/slackapi/bolt-js
-Block UI - https://app.slack.com/block-kit-builder/
+Basic app setup: https://api.slack.com/authentication/basics  
+Signing secrets: https://api.slack.com/authentication/verifying-requests-from-slack  
+Features: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-vs-rest.html  
+Cost: https://aws.amazon.com/about-aws/whats-new/2019/12/amazon-api-gateway-offers-faster-cheaper-simpler-apis-using-http-apis-preview/  
+Validating Library for Node: https://nodejs.org/api/crypto.html#crypto_crypto_createhmac_algorithm_key_options  
+Verify Requst from Slack: https://api.slack.com/authentication/verifying-requests-from-slack  
+chat.postMessage: https://api.slack.com/methods/chat.postMessage  
+Definition of $LATEST version of AWS Lambda: https://stackoverflow.com/questions/60703463/definition-of-latest-version-of-aws-lambda  
+Slack Bold Node JS: https://github.com/slackapi/bolt-js  
+Block UI - https://app.slack.com/block-kit-builder/  

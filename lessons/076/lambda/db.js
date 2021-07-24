@@ -1,4 +1,5 @@
-var AWS = require('aws-sdk');
+const AWS = require('aws-sdk');
+const { v4: uuidv4 } = require('uuid');
 
 AWS.config.update({ region: 'us-east-1' });
 
@@ -8,10 +9,11 @@ exports.saveItem = (item) => {
     var params = {
         TableName: 'todos',
         Item: {
-            'item': { S: item },
+            'uuid': { S: uuidv4() },
+            'item': { S: item }
         }
     };
-    ddb.putItem(params, function (err, data) {
+    ddb.putItem(params, (err, data) => {
         if (err) {
             console.error("Error", err);
         } else {

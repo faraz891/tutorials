@@ -25,6 +25,36 @@ npm install @slack/bolt
 npm install --save-dev jest
 ```
 
+IAM Policy: AWSLambdaSlackAccess
+IAM Role: wall-e-role
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "logs:CreateLogGroup",
+            "Resource": "arn:aws:logs:us-east-1:424432388155:*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+            ],
+            "Resource": [
+                "arn:aws:logs:us-east-1:424432388155:log-group:/aws/lambda/wall-e:*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": "dynamodb:*",
+            "Resource": "arn:aws:dynamodb:us-east-1:424432388155:table/todos"
+        }
+    ]
+}
+```
+
 ## 2. Build
 ```
 docker build -t 424432388155.dkr.ecr.us-east-1.amazonaws.com/wall-e:v1.0.0 .

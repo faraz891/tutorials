@@ -10,23 +10,24 @@ const processAppMention = (body, callback) => {
     db.saveItem(item, (error, result) => {
         if (error !== null) {
             callback(error)
-        }
-        const message = {
-            channel: body.event.channel,
-            text: `Item: \`${item}\` is saved to *Amazon DynamoDB*!`
-        };
-        axios({
-            method: 'post',
-            url: 'https://slack.com/api/chat.postMessage',
-            headers: { 'Content-Type': 'application/json; charset=utf-8', 'Authorization': `Bearer ${token}` },
-            data: message
-        })
-            .then((response) => {
-                callback(null);
+        } else {
+            const message = {
+                channel: body.event.channel,
+                text: `Item: \`${item}\` is saved to *Amazon DynamoDB*!`
+            };
+            axios({
+                method: 'post',
+                url: 'https://slack.com/api/chat.postMessage',
+                headers: { 'Content-Type': 'application/json; charset=utf-8', 'Authorization': `Bearer ${token}` },
+                data: message
             })
-            .catch((error) => {
-                callback("failed to process app_mention");
-            });
+                .then((response) => {
+                    callback(null);
+                })
+                .catch((error) => {
+                    callback("failed to process app_mention");
+                });
+        }
     });
 };
 

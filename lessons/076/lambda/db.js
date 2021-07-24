@@ -13,11 +13,11 @@ exports.saveItem = (item, callback) => {
             'item': { S: item }
         }
     };
-    ddb.putItem(params, (err, data) => {
-        if (err) {
-            callback(new Error(err));
+    ddb.putItem(params, (error, data) => {
+        if (error) {
+            callback(new Error(error));
         } else {
-            callback(null, "success");
+            callback(null);
         }
     });
 };

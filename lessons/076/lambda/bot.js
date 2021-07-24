@@ -21,11 +21,11 @@ const processAppMention = (body, callback) => {
             headers: { 'Content-Type': 'application/json; charset=utf-8', 'Authorization': `Bearer ${token}` },
             data: message
         })
-            .then(function (response) {
+            .then((response) => {
                 console.debug("responce from slack:", response);
                 callback(null);
             })
-            .catch(function (error) {
+            .catch((error) => {
                 callback("failed to process app_mention");
             });
     });

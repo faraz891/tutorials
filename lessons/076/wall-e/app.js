@@ -1,9 +1,34 @@
-const axios = require('axios');
 const security = require('./security');
+const axios = require('axios');
 const db = require('./db');
 
 const signingSecret = process.env.SLACK_SIGNING_SECRET;
 const token = process.env.SLACK_BOT_TOKEN;
+
+exports.handler = (event, context, callback) => {
+    const body = JSON.parse(event.body);
+    if (security.validateSlackRequest(event, signingSecret)) {
+        switch (body.type) {
+            case "url_verification": callback(null, body.challenge); break;
+            case "event_callback": processRequest(body, callback); break;
+            default: callback(null);
+        }
+    }
+    else callback("verification failed");
+};
+
+const processRequest = (body, callback) => {
+    switch (body.event.type) {
+        case "message": processMessages(body, callback); break;
+        case "app_mention": processAppMention(body, callback); break;
+        default: callback(null);
+    }
+};
+
+const processMessages = (body, callback) => {
+    console.debug("message:", body.event.text)
+    callback(null)
+};
 
 const processAppMention = (body, callback) => {
     const item = body.event.text.split(":").pop().trim();
@@ -29,31 +54,4 @@ const processAppMention = (body, callback) => {
                 });
         }
     });
-};
-
-const processMessages = (body, callback) => {
-    console.debug("message:", body.event.text)
-    callback(null)
-};
-
-const processRequest = (body, callback) => {
-    switch (body.event.type) {
-        case "app_mention": processAppMention(body, callback); break;
-        case "message": processMessages(body, callback); break;
-        default: callback(null);
-    }
-};
-
-exports.handler = (event, context, callback) => {
-    console.debug("slack request event:\n", event);
-
-    if (security.validateSlackRequest(event, signingSecret)) {
-        const body = JSON.parse(event.body);
-        switch (body.type) {
-            case "url_verification": callback(null, body.challenge); break;
-            case "event_callback": processRequest(body, callback); break;
-            default: callback(null);
-        }
-    }
-    else callback("verification failed");
 };

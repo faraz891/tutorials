@@ -4,4 +4,4 @@ COPY *.js package*.json  /var/task/
 
 RUN npm ci --production
 
-CMD [ "bot.handler" ]
+CMD [ "app.handler" ]

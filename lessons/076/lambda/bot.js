@@ -1,6 +1,6 @@
 const axios = require('axios');
 const security = require('./security');
-const blocks = require('./blocks');
+// const blocks = require('./blocks');
 
 const signingSecret = process.env.SLACK_SIGNING_SECRET;
 const token = process.env.SLACK_BOT_TOKEN;
@@ -9,7 +9,8 @@ const processAppMention = (body, callback) => {
     console.debug(body.event.text)
     const message = {
         channel: body.event.channel,
-        blocks: blocks.todo("create aws lambda secrets manager integration lesson")
+        text: `Item: ${body.event.text} is saved to Amazon DynamoDB!`
+        // blocks: blocks.todo("create aws lambda secrets manager integration lesson")
     };
     console.debug("message:", message);
     axios({

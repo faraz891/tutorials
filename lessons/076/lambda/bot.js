@@ -7,9 +7,10 @@ const token = process.env.SLACK_BOT_TOKEN;
 
 const processAppMention = (body, callback) => {
     console.debug(body.event.text)
+    const item = body.event.text.split(":").pop();
     const message = {
         channel: body.event.channel,
-        text: `Item: ${body.event.text} is saved to Amazon DynamoDB!`
+        text: `Item: ${item} is saved to Amazon DynamoDB!`
         // blocks: blocks.todo("create aws lambda secrets manager integration lesson")
     };
     console.debug("message:", message);

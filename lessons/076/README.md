@@ -153,10 +153,12 @@ exports.handler = (event, context, callback) => {
 ```
 - Package and upload docker image
 ```
-docker build -t 424432388155.dkr.ecr.us-east-1.amazonaws.com/wall-e:v0.1.1 .
+docker build \
+-t 424432388155.dkr.ecr.us-east-1.amazonaws.com/wall-e:v0.1.1 .
 ```
 ```
-docker push 424432388155.dkr.ecr.us-east-1.amazonaws.com/wall-e:v0.1.1
+docker push \
+424432388155.dkr.ecr.us-east-1.amazonaws.com/wall-e:v0.1.1
 ```
 - Redeploy AWS Lambda using v0.1.1 image tag
 - Go back to Slack and click `Retry`
@@ -251,10 +253,12 @@ const processMessages = (body, callback) => {
 - Update `Dockerfile` to use `npm ci --production`
 - Package and upload docker image
 ```
-docker build -t 424432388155.dkr.ecr.us-east-1.amazonaws.com/wall-e:v0.1.2 .
+docker build \
+-t 424432388155.dkr.ecr.us-east-1.amazonaws.com/wall-e:v0.1.2 .
 ```
 ```
-docker push 424432388155.dkr.ecr.us-east-1.amazonaws.com/wall-e:v0.1.2
+docker push \
+424432388155.dkr.ecr.us-east-1.amazonaws.com/wall-e:v0.1.2
 ```
 - Update AWS Lambda to use `v0.1.2` tag
 - Optionally: Delete all log streams
@@ -340,10 +344,12 @@ const processAppMention = (body, callback) => {
 ```
 - Package and upload docker image
 ```
-docker build -t 424432388155.dkr.ecr.us-east-1.amazonaws.com/wall-e:v0.1.3 .
+docker build \
+-t 424432388155.dkr.ecr.us-east-1.amazonaws.com/wall-e:v0.1.3 .
 ```
 ```
-docker push 424432388155.dkr.ecr.us-east-1.amazonaws.com/wall-e:v0.1.3
+docker push \
+424432388155.dkr.ecr.us-east-1.amazonaws.com/wall-e:v0.1.3
 ```
 - Redeploy Lambda using `v0.1.3` tag
 - Post `@WALL-E todo: Save the Planet!` message

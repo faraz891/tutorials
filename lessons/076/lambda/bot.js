@@ -6,32 +6,33 @@ const signingSecret = process.env.SLACK_SIGNING_SECRET;
 const token = process.env.SLACK_BOT_TOKEN;
 
 const processAppMention = (body, callback) => {
-    console.debug(body.event.text)
     const item = body.event.text.split(":").pop().trim();
-    db.saveItem(item);
-    const message = {
-        channel: body.event.channel,
-        text: `Item: \`${item}\` is saved to *Amazon DynamoDB*!`
-    };
-    console.debug("message:", message);
-    axios({
-        method: 'post',
-        url: 'https://slack.com/api/chat.postMessage',
-        headers: { 'Content-Type': 'application/json; charset=utf-8', 'Authorization': `Bearer ${token}` },
-        data: message
-    })
-        .then(function (response) {
-            console.debug("responce from slack:", response);
-            callback(null);
+    db.saveItem(item, (error, result) => {
+        if (error !== null) {
+            callback(error)
+        }
+        const message = {
+            channel: body.event.channel,
+            text: `Item: \`${item}\` is saved to *Amazon DynamoDB*!`
+        };
+        axios({
+            method: 'post',
+            url: 'https://slack.com/api/chat.postMessage',
+            headers: { 'Content-Type': 'application/json; charset=utf-8', 'Authorization': `Bearer ${token}` },
+            data: message
         })
-        .catch(function (error) {
-            console.error(error);
-            callback("failed to process app_mention");
-        });
+            .then(function (response) {
+                console.debug("responce from slack:", response);
+                callback(null);
+            })
+            .catch(function (error) {
+                callback("failed to process app_mention");
+            });
+    });
 };
 
 const processMessages = (body, callback) => {
-    console.log("message:", body.event.text)
+    console.debug("message:", body.event.text)
     callback(null)
 };
 

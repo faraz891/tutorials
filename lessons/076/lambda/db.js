@@ -5,7 +5,7 @@ AWS.config.update({ region: 'us-east-1' });
 
 var ddb = new AWS.DynamoDB({ apiVersion: '2012-08-10' });
 
-exports.saveItem = (item) => {
+exports.saveItem = (item, callback) => {
     var params = {
         TableName: 'todos',
         Item: {
@@ -15,9 +15,9 @@ exports.saveItem = (item) => {
     };
     ddb.putItem(params, (err, data) => {
         if (err) {
-            console.error("Error", err);
+            callback(new Error(err));
         } else {
-            console.log("Success", data);
+            callback(null, "success");
         }
     });
 };

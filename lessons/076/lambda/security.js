@@ -13,11 +13,6 @@ exports.validateSlackRequest = (event, signingSecret) => {
     const computedSlackSignature = "v0=" + hmac;
     const isValid = computedSlackSignature === slackSignature;
 
-    // Debug
-    console.debug("slack signature:", slackSignature);
-    console.debug("computed slack signature:", computedSlackSignature);
-    console.debug("slack requests is valid?:", isValid)
-
     return isValid;
 };
 

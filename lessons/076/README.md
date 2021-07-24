@@ -19,7 +19,9 @@ Description: Compactor robot
 export SLACK_SIGNING_SECRET=0f65198107b93895c006844624725c24
 export SLACK_BOT_TOKEN=xoxb-1494779483671-2326236521328-V2s5AG7rqbBLwTeGMldA5odK
 
-npm install @slack/bolt
+npm install aws-sdk
+npm install axios
+npm install uuid
 
 ```
 npm install --save-dev jest
@@ -71,7 +73,12 @@ Slack Bold Node JS: https://github.com/slackapi/bolt-js
 Block UI - https://app.slack.com/block-kit-builder/
 
 ## Clean Up
-- Delete ngrok
-- Delete ECR `bot`
+- Delete ECR `wall-e`
 - Delete IAM User `admin`
+- Delete IAM Role `wall-e-role`
+- Delete IAM Policy `AWSLambdaSlackAccess`
+- Delete DynamoDB table `todos`
+- Delete Lambda `wall-e`
+- Delete CloudWatch log groups `/aws/lambda/wall-e`
+- Delete API Gateway `slack`
 - Delete docker images `docker rm -vf $(docker ps -a -q) && docker rmi -f $(docker images -a -q)`

@@ -8,7 +8,7 @@ exports.saveItem = (item) => {
     var params = {
         TableName: 'todos',
         Item: {
-            'item': { N: item },
+            'item': { S: item },
         }
     };
     ddb.putItem(params, function (err, data) {

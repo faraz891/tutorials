@@ -42,9 +42,7 @@ IAM Role: wall-e-role
                 "logs:CreateLogStream",
                 "logs:PutLogEvents"
             ],
-            "Resource": [
-                "arn:aws:logs:us-east-1:424432388155:log-group:/aws/lambda/wall-e:*"
-            ]
+            "Resource": "arn:aws:logs:us-east-1:424432388155:log-group:/aws/lambda/wall-e:*"
         },
         {
             "Effect": "Allow",

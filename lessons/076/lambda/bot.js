@@ -10,7 +10,7 @@ const processAppMention = (body, callback) => {
     const item = body.event.text.split(":").pop().trim();
     const message = {
         channel: body.event.channel,
-        text: `Item: "*${item}*" is saved to Amazon DynamoDB!`
+        text: `Item: \`${item}\` is saved to *Amazon DynamoDB*!`
     };
     console.debug("message:", message);
     axios({

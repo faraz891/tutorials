@@ -69,13 +69,18 @@ CMD [ "app.handler" ]
 ```
 - Create ECR Repository `wall-e`
 ```bash
-aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 424432388155.dkr.ecr.us-east-1.amazonaws.com
+aws ecr get-login-password --region us-east-1 \
+| docker login \
+--username AWS \
+--password-stdin 424432388155.dkr.ecr.us-east-1.amazonaws.com
 ```
 ```
-docker build -t 424432388155.dkr.ecr.us-east-1.amazonaws.com/wall-e:v0.1.0 .
+docker build \
+-t 424432388155.dkr.ecr.us-east-1.amazonaws.com/wall-e:v0.1.0 .
 ```
 ```
-docker push 424432388155.dkr.ecr.us-east-1.amazonaws.com/wall-e:v0.1.0
+docker push \
+424432388155.dkr.ecr.us-east-1.amazonaws.com/wall-e:v0.1.0
 ```
 ## 5. Deploy Lambda Using Container Image
 - Select `Containerimage` from the console
@@ -148,10 +153,12 @@ exports.handler = (event, context, callback) => {
 ```
 - Package and upload docker image
 ```
-docker build -t 424432388155.dkr.ecr.us-east-1.amazonaws.com/wall-e:v0.1.1 .
+docker build \
+-t 424432388155.dkr.ecr.us-east-1.amazonaws.com/wall-e:v0.1.1 .
 ```
 ```
-docker push 424432388155.dkr.ecr.us-east-1.amazonaws.com/wall-e:v0.1.1
+docker push \
+424432388155.dkr.ecr.us-east-1.amazonaws.com/wall-e:v0.1.1
 ```
 - Redeploy AWS Lambda using v0.1.1 image tag
 - Go back to Slack and click `Retry`
@@ -239,17 +246,19 @@ const processRequest = (body, callback) => {
 - Create `processMessages` method in `app.js`
 ```javascript
 const processMessages = (body, callback) => {
-    console.debug("message:", body.event.text)
-    callback(null)
+    console.debug("message:", body.event.text);
+    callback(null);
 };
 ```
 - Update `Dockerfile` to use `npm ci --production`
 - Package and upload docker image
 ```
-docker build -t 424432388155.dkr.ecr.us-east-1.amazonaws.com/wall-e:v0.1.2 .
+docker build \
+-t 424432388155.dkr.ecr.us-east-1.amazonaws.com/wall-e:v0.1.2 .
 ```
 ```
-docker push 424432388155.dkr.ecr.us-east-1.amazonaws.com/wall-e:v0.1.2
+docker push \
+424432388155.dkr.ecr.us-east-1.amazonaws.com/wall-e:v0.1.2
 ```
 - Update AWS Lambda to use `v0.1.2` tag
 - Optionally: Delete all log streams
@@ -335,10 +344,12 @@ const processAppMention = (body, callback) => {
 ```
 - Package and upload docker image
 ```
-docker build -t 424432388155.dkr.ecr.us-east-1.amazonaws.com/wall-e:v0.1.3 .
+docker build \
+-t 424432388155.dkr.ecr.us-east-1.amazonaws.com/wall-e:v0.1.3 .
 ```
 ```
-docker push 424432388155.dkr.ecr.us-east-1.amazonaws.com/wall-e:v0.1.3
+docker push \
+424432388155.dkr.ecr.us-east-1.amazonaws.com/wall-e:v0.1.3
 ```
 - Redeploy Lambda using `v0.1.3` tag
 - Post `@WALL-E todo: Save the Planet!` message

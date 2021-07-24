@@ -3,10 +3,10 @@ const { v4: uuidv4 } = require('uuid');
 
 AWS.config.update({ region: 'us-east-1' });
 
-var ddb = new AWS.DynamoDB({ apiVersion: '2012-08-10' });
+const ddb = new AWS.DynamoDB({ apiVersion: '2012-08-10' });
 
 exports.saveItem = (item, callback) => {
-    var params = {
+    const params = {
         TableName: 'todos',
         Item: {
             'uuid': { S: uuidv4() },

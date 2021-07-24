@@ -22,7 +22,6 @@ const processAppMention = (body, callback) => {
             data: message
         })
             .then((response) => {
-                console.debug("responce from slack:", response);
                 callback(null);
             })
             .catch((error) => {

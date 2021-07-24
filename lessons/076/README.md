@@ -72,10 +72,12 @@ CMD [ "app.handler" ]
 aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 424432388155.dkr.ecr.us-east-1.amazonaws.com
 ```
 ```
-docker build -t 424432388155.dkr.ecr.us-east-1.amazonaws.com/wall-e:v0.1.0 .
+docker build \
+-t 424432388155.dkr.ecr.us-east-1.amazonaws.com/wall-e:v0.1.0 .
 ```
 ```
-docker push 424432388155.dkr.ecr.us-east-1.amazonaws.com/wall-e:v0.1.0
+docker push \
+424432388155.dkr.ecr.us-east-1.amazonaws.com/wall-e:v0.1.0
 ```
 ## 5. Deploy Lambda Using Container Image
 - Select `Containerimage` from the console

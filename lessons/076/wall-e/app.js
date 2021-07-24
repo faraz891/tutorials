@@ -1,6 +1,7 @@
-const security = require('./security');
 const axios = require('axios');
 const db = require('./db');
+
+const security = require('./security');
 
 const signingSecret = process.env.SLACK_SIGNING_SECRET;
 const token = process.env.SLACK_BOT_TOKEN;
@@ -26,8 +27,8 @@ const processRequest = (body, callback) => {
 };
 
 const processMessages = (body, callback) => {
-    console.debug("message:", body.event.text)
-    callback(null)
+    console.debug("message:", body.event.text);
+    callback(null);
 };
 
 const processAppMention = (body, callback) => {

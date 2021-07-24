@@ -1,6 +1,6 @@
 const axios = require('axios');
 const security = require('./security');
-// const blocks = require('./blocks');
+const db = require('./db');
 
 const signingSecret = process.env.SLACK_SIGNING_SECRET;
 const token = process.env.SLACK_BOT_TOKEN;
@@ -8,6 +8,7 @@ const token = process.env.SLACK_BOT_TOKEN;
 const processAppMention = (body, callback) => {
     console.debug(body.event.text)
     const item = body.event.text.split(":").pop().trim();
+    db.saveItem(item);
     const message = {
         channel: body.event.channel,
         text: `Item: \`${item}\` is saved to *Amazon DynamoDB*!`

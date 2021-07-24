@@ -246,8 +246,8 @@ const processRequest = (body, callback) => {
 - Create `processMessages` method in `app.js`
 ```javascript
 const processMessages = (body, callback) => {
-    console.debug("message:", body.event.text)
-    callback(null)
+    console.debug("message:", body.event.text);
+    callback(null);
 };
 ```
 - Update `Dockerfile` to use `npm ci --production`

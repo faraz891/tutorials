@@ -1,4 +1,4 @@
-# How to Build Slack Bot? (Node JS | AWS Lambda & DynamoDB - AWS Serverless)
+# How to Build Slack Bot? (Node JS | AWS Lambda & DynamoDB - AWS Serverless | New Slack Apps)
 
 [YouTube Tutorial]()
 
